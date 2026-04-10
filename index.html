@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziyorat - Exclusive VIP Invitation</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #c5a059;
+            --deep-green: #0a3d1d;
+            --text-color: #2c2c2c;
+        }
+
+        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background: #fff; color: var(--text-color); overflow-x: hidden; }
+
+        /* KONVERT - FAQAT KABA RASMI */
+        #envelope {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: url('kaba_gate.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: 1.5s cubic-bezier(0.8, 0, 0.2, 1);
+        }
+
+        /* KICHIKROQ VA NAFIS MUHR */
+        .seal-container { text-align: center; cursor: pointer; transition: 0.5s; }
+        .seal-container img { width: 100px; filter: drop-shadow(0 0 15px rgba(197, 160, 89, 0.6)); }
+        .seal-text { color: #fff; font-family: 'Cinzel', serif; margin-top: 15px; letter-spacing: 3px; font-size: 11px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+
+        /* ASOSIY SAHIFA - ISLOMIY ARKALI FON */
+        #content { 
+            display: none; 
+            min-height: 100vh;
+            background: url('main_bg.jpg') no-repeat center top;
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 60px 20px;
+        }
+
+        .main-card {
+            max-width: 500px; margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.9); /* Shaffof oq fon */
+            backdrop-filter: blur(10px);
+            padding: 60px 30px; border-radius: 100px 100px 20px 20px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            border: 1px solid var(--gold);
+            text-align: center; position: relative;
+        }
+
+        /* Oltin naqshli hoshiya */
+        .card-border {
+            position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid var(--gold); border-radius: 95px 95px 15px 15px;
+            pointer-events: none; opacity: 0.5;
+        }
+
+        .bobo-buvi-img { 
+            width: 220px; height: 220px; object-fit: cover;
+            margin: 0 auto 30px; display: block; 
+            border-radius: 50%; border: 3px solid var(--gold);
+            padding: 5px; background: #fff;
+        }
+
+        .names { font-family: 'Cinzel', serif; font-size: 2.3rem; color: var(--deep-green); font-weight: 700; margin: 15px 0; letter-spacing: 1px; }
+        .invitation-text { font-style: italic; font-size: 1.05rem; color: #444; line-height: 1.8; margin-bottom: 35px; }
+
+        .info-grid { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
+        .info-box { border-bottom: 2px solid var(--gold); padding: 10px 20px; }
+        .info-box strong { color: var(--gold); display: block; font-size: 0.7rem; letter-spacing: 2px; }
+
+        .btn-gold { 
+            background: linear-gradient(45deg, #c5a059, #f9f1b0, #c5a059);
+            color: #000; padding: 18px 40px; border-radius: 50px; 
+            display: inline-block; text-decoration: none; font-weight: bold; 
+            margin: 20px 0; box-shadow: 0 10px 20px rgba(197,160,89,0.3);
+            text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+        }
+
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin: 40px 0; }
+        .t-item { background: rgba(10, 61, 29, 0.05); padding: 15px; border-radius: 15px; min-width: 60px; border: 1px solid rgba(197,160,89,0.3); }
+        .t-item span { font-size: 1.8rem; font-weight: bold; color: var(--deep-green); display: block; }
+        .t-item small { font-size: 0.6rem; color: var(--gold); font-weight: bold; }
+
+        .rsvp-section { margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px; }
+        .input-field { width: 100%; padding: 16px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 30px; text-align: center; font-family: 'Montserrat'; }
+        
+        .opt-btn { padding: 12px 25px; border: 1px solid var(--gold); border-radius: 25px; cursor: pointer; background: none; font-weight: bold; transition: 0.3s; margin: 5px; }
+        .opt-btn.active { background: var(--deep-green); color: white; border-color: var(--deep-green); }
+
+        .submit-btn { background: var(--deep-green); color: white; padding: 18px 50px; border-radius: 40px; border: none; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="envelope">
+        <div class="seal-container" onclick="openMe()">
+            <img src="seal_gold.png" alt="Oltin Muhr">
+            <div class="seal-text">BISMILLAH BILAN OCHISH</div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="main-card" data-aos="zoom-in" data-aos-duration="2000">
+            <div class="card-border"></div>
+            
+            <img src="kaaba_clock.png" style="width: 50px; opacity: 0.6; margin-bottom: 20px;" data-aos="fade-down">
+            
+            <img src="bobo_buvi.png" class="bobo-buvi-img" data-aos="zoom-out" data-aos-delay="500">
+
+            <p style="color: var(--gold); font-weight: bold; letter-spacing: 5px; font-size: 0.7rem;">ASSALOMU ALAYKUM</p>
+            
+            <h1 class="names" data-aos="fade-up" data-aos-delay="700">RAIM BOBO & <br> HOJI ONAMIZ</h1>
+            
+            <p class="invitation-text" data-aos="fade-up" data-aos-delay="900">
+                "Allohning marhamati ila muqaddas ziyoratlarni ado etib qaytgan qadrdonlarimiz sharafiga yoziladigan ehson dasturxonimizga tashrif buyurishingiz biz uchun katta quvonchdir."
+            </p>
+
+            <div class="info-grid" data-aos="fade-up" data-aos-delay="1100">
+                <div class="info-box">
+                    <strong>SANA</strong>
+                    27-DEKABR, 2026
+                </div>
+                <div class="info-box">
+                    <strong>VAQT</strong>
+                    SOAT 12:00 DA
+                </div>
+            </div>
+
+            <a href="https://maps.google.com" target="_blank" class="btn-gold" data-aos="flip-up" data-aos-delay="1300">MANZILNI KO'RISH</a>
+
+            <div class="timer-grid" data-aos="fade-up" data-aos-delay="1500">
+                <div class="t-item"><span id="d">00</span><small>KUN</small></div>
+                <div class="t-item"><span id="h">00</span><small>SOAT</small></div>
+                <div class="t-item"><span id="m">00</span><small>MINUT</small></div>
+            </div>
+
+            <div class="rsvp-section" data-aos="fade-in" data-aos-delay="1700">
+                <h3 style="font-family: 'Cinzel'; color: var(--deep-green);">Tashrifingizni tasdiqlang</h3>
+                <form id="ziyorat-form">
+                    <input type="text" name="ism" placeholder="Ismingizni kiriting" required class="input-field">
+                    <div>
+                        <button type="button" class="opt-btn" id="btn-yes" onclick="setStatus('Boraman', this)">BORAMAN</button>
+                        <button type="button" class="opt-btn" id="btn-no" onclick="setStatus('Borolmayman', this)">BOROLMAYMAN</button>
+                    </div>
+                    <input type="hidden" name="holat" id="guest-status" required>
+                    <button type="submit" class="submit-btn" id="send-btn">YUBORISH</button>
+                </form>
+                <div id="success-msg" style="display:none; color: var(--deep-green); font-weight: bold; margin-top: 20px;">Xabaringiz yuborildi. Rahmat!</div>
+            </div>
+
+            <img src="tasbeh_icon.png" style="width: 80px; margin-top: 40px; opacity: 0.3;">
+        </div>
+    </div>
+
+    <audio id="muzika" loop><source src="music.mp3" type="audio/mpeg"></audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        function openMe() {
+            document.getElementById('envelope').style.transform = 'translateY(-100vh)';
+            document.getElementById('content').style.display = 'block';
+            document.getElementById('muzika').play();
+            setTimeout(() => { AOS.init(); }, 100);
+            setInterval(updateTimer, 1000);
+        }
+
+        function setStatus(val, el) {
+            document.getElementById('guest-status').value = val;
+            document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function updateTimer() {
+            const diff = new Date("December 27, 2026 12:00:00").getTime() - new Date().getTime();
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            }
+        }
+
+        document.getElementById('ziyorat-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('send-btn');
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzN788ZL4hPwcyHjcwXFgz7PiNed_qP1NV_4hHwsGZFKJ7QOgOAe1MNBjeBsl1ww1UE6A/exec';
+            btn.innerText = "YUBORILMOQDA...";
+            fetch(scriptURL, { method: 'POST', body: new FormData(this)})
+                .then(() => { this.style.display = 'none'; document.getElementById('success-msg').style.display = 'block'; })
+                .catch(() => alert("Xatolik!"));
+        });
+    </script>
+</body>
+</html>
